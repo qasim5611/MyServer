@@ -175,7 +175,7 @@ app.get("/gettockenomicsByid", SiteTokenomics.gettockenomicsByid);
 // });
 
 connectDatabase();
-const PORT = process.env.PORT || 8073;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
   console.log("server is started on port " + PORT);
 });

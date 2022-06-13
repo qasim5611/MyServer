@@ -85,7 +85,7 @@ app.get("/getSocialLinks", Admindash.getSocialLinks);
 app.post("/setHomeBanner", upload.single("image"), Admindash.setHomeBanner);
 app.get("/getHomeBanner", Admindash.getHomeBanner);
 /////////////////////////////////////////////////////////////////
-app.post("/setNftPromote", uploadall.array("files"), Admindash.setNftPromote);
+app.post("/setNftPromote", cors(),  uploadall.array("files"), Admindash.setNftPromote);
 app.get("/getNftPromoteRefresh", Admindash.getNftPromote);
 
 app.post("/setNftPopular", uploadall.array("files"), Admindash.setNftPopular);

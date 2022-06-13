@@ -241,57 +241,6 @@ const adminDashboard = {
   //   }
   // },
 
-  setNftPromote: async function (req, res, next) {
-    try {
-      console.log("req");
-      console.log(req);
-      let filesArray = [];
-      req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          //  fileSize: fileSizeFormatter(element.size, 2),
-        };
-        filesArray.push(file);
-      });
-      console.log(req.body.id);
-      let id = req.body.id;
-
-      //  const multipleFiles = new NftBanner({
-      //    title: req.body.title,
-      //    files: filesArray,
-      //  });
-      //  await multipleFiles.save();
-
-      const multipleFiles = {
-        title: req.body.title,
-        files: filesArray,
-      };
-
-      // let isSaved = await multipleFiles.save();
-      //  res.status(201).send("Files Uploaded Successfully");
-      // console.log(isSaved);
-
-      let isUpdates = await NftPromote.findOneAndUpdate(
-        { _id: id },
-        multipleFiles,
-        { upsert: true }
-      );
-      if (isUpdates) {
-        console.log("test");
-        const user = await NftPromote.find();
-
-        return res.send({
-          msg: "Updated Successful",
-          user,
-        });
-      }
-    } catch (error) {
-      res.status(400).send(error.message);
-    }
-  },
-
   setNftPopular: async function (req, res, next) {
     try {
       console.log("req");
@@ -582,6 +531,57 @@ const adminDashboard = {
       if (isUpdates) {
         console.log("test");
         const user = await NftBanner.find();
+
+        return res.send({
+          msg: "Updated Successful",
+          user,
+        });
+      }
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  },
+
+  setNftPromote: async function (req, res, next) {
+    try {
+      console.log("req");
+      console.log(req);
+      let filesArray = [];
+      req.files.forEach((element) => {
+        const file = {
+          fileName: element.originalname,
+          filePath: element.path,
+          fileType: element.mimetype,
+          //  fileSize: fileSizeFormatter(element.size, 2),
+        };
+        filesArray.push(file);
+      });
+      console.log(req.body.id);
+      let id = req.body.id;
+
+      //  const multipleFiles = new NftBanner({
+      //    title: req.body.title,
+      //    files: filesArray,
+      //  });
+      //  await multipleFiles.save();
+
+      const multipleFiles = {
+        title: req.body.title,
+        files: filesArray,
+      };
+
+      // let isSaved = await multipleFiles.save();
+      //  res.status(201).send("Files Uploaded Successfully");
+      // console.log(isSaved);
+
+      let isUpdates = await NftPromote.findOneAndUpdate(
+        { _id: id },
+        multipleFiles,
+        { upsert: true }
+      );
+      if (isUpdates) {
+        console.log("test");
+        const user = await NftPromote.find();
 
         return res.send({
           msg: "Updated Successful",

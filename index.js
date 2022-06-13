@@ -9,7 +9,7 @@ const cors = require("cors");
 
 
 app.use(cors());
-const { uploadall } = require("./helpers/filehelper");
+// const { upload2 } = require("./helpers/filehelper");
 
 
 
@@ -32,10 +32,6 @@ const storage = multer.diskStorage({
     cb(null, uuidv4() + "." + file.mimetype.split("/")[1]);
   },
 });
-
-
-
-
 var upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
@@ -57,6 +53,39 @@ var upload = multer({
     }
   },
 });
+
+
+const storage2 = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename(req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname);
+  },
+});
+var upload2 = multer({
+  storage: storage2,
+  fileFilter: (req, file, cb) => {
+    if (
+       file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      // return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+      return cb(new Error("File is required"));
+    }
+  },
+});
+
+
+
+
+
+
+
 
 app.use("/uploads", express.static(path.join(_dirname, "uploads")));
 
@@ -87,17 +116,17 @@ app.get("/getSocialLinks", Admindash.getSocialLinks);
 app.post("/setHomeBanner", upload.single("image"), Admindash.setHomeBanner);
 app.get("/getHomeBanner", Admindash.getHomeBanner);
 /////////////////////////////////////////////////////////////////
-app.post("/setNftPromote", cors(),  uploadall.array("files"), Admindash.setNftPromote);
+app.post("/setNftPromote",  upload2.array("files"), Admindash.setNftPromote);
 app.get("/getNftPromoteRefresh", Admindash.getNftPromote);
 
-app.post("/setNftPopular", uploadall.array("files"), Admindash.setNftPopular);
+app.post("/setNftPopular", upload2.array("files"), Admindash.setNftPopular);
 app.get("/getNftPopularRefresh", Admindash.getNftPopular);
 
-app.post("/setNftRecent", uploadall.array("files"), Admindash.setNftRecent);
+app.post("/setNftRecent", upload2.array("files"), Admindash.setNftRecent);
 app.get("/getNftRecentRefresh", Admindash.getNftRecent);
 
 
-app.post("/setNftBanner", uploadall.array("files"), Admindash.setNftBanner);
+app.post("/setNftBanner", upload2.array("files"), Admindash.setNftBanner);
 app.get("/getNftBannerRefresh", Admindash.getNftBanner);
 
 app.post("/updateAboutUs", Admindash.updateAboutUs);
@@ -169,21 +198,6 @@ app.post("/updateTokenomics", upload.single("image"), SiteTokenomics.updateToken
 app.get("/gettockenomicsByid", SiteTokenomics.gettockenomicsByid);
 
 
-
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-  );
-  next();
-});
-
 ///////////////////////////////////////
 // app.use(express.static("./build"));
 
@@ -192,6 +206,7 @@ app.use((req, res, next) => {
 // });
 
 connectDatabase();
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
   console.log("server is started on port " + PORT);

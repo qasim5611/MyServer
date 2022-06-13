@@ -6,11 +6,11 @@ const connectDatabase = require("./config/connection");
 const app = express();
 const path = require("path");
 const cors = require("cors");
-
-
-
-app.use(cors());
-
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 
 var bodyParser = require("body-parser");

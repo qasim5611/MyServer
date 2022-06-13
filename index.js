@@ -9,7 +9,7 @@ const cors = require("cors");
 
 // const { uploadall } = require("./helpers/filehelper");
 
-app.use(cors());
+
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -203,7 +203,7 @@ app.get("/gettockenomicsByid", SiteTokenomics.gettockenomicsByid);
 
 
 
-
+app.use(cors());
 ///////////////////////////////////////
 // app.use(express.static("./build"));
 

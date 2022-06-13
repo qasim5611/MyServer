@@ -15,22 +15,8 @@ const cors = require("cors");
 // };
 // // const { upload } = require("./helpers/filehelper");
 // app.use(cors(options));
-app.use(cors({ origin: "http://localhost:3000" }));
-app.use(cors({ origin: "http://localhost:8080" }));
-app.use(cors({ origin: "https://ap.ragdollcatnft.com" }));
+app.use(cors());
 
-
-// // Add headers before the routes are defined
-// app.use(function (req, res, next) {
-
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-//     res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-//     res.setHeader("Access-Control-Allow-Origin", "https://ap.ragdollcatnft.com");
-
-//     // Pass to next layer of middleware
-//     next();
-// });
 
 
 var bodyParser = require("body-parser");

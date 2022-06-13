@@ -7,9 +7,9 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 
-// const { uploadall } = require("./helpers/filehelper");
+const { uploadall } = require("./helpers/filehelper");
 
-
+app.use(cors());
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,41 +30,6 @@ const storage = multer.diskStorage({
     cb(null, uuidv4() + "." + file.mimetype.split("/")[1]);
   },
 });
-
-
-
-//////////////////////////////////////////////////////// Multiple Images ////////////
-const storagemulti = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
-    );
-  },
-});
-const filefiltermulti = (req, file, cb) => {
-  if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const uploadall = multer({ storage: storagemulti, fileFilter: filefiltermulti });
-
-
-
-//////////////////////////////////////////////////////// Multiple Images ////////////
-
-
-
 
 
 
@@ -203,7 +168,7 @@ app.get("/gettockenomicsByid", SiteTokenomics.gettockenomicsByid);
 
 
 
-app.use(cors());
+
 ///////////////////////////////////////
 // app.use(express.static("./build"));
 

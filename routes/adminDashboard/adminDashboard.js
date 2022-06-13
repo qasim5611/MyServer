@@ -194,13 +194,12 @@ const adminDashboard = {
       console.log(req);
       let filesArray = [];
       req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          fileID: uuidv4(),
-          //  fileSize: fileSizeFormatter(element.size, 2),
-        };
+          const file = {
+            fileName: element.originalname,
+            filePath: element.path,
+            fileType: element.mimetype,
+            //  fileSize: fileSizeFormatter(element.size, 2),
+          };
         filesArray.push(file);
       });
       console.log(req.body.id);

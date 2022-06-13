@@ -9,7 +9,7 @@ const cors = require("cors");
 
 
 app.use(cors());
-// const { upload2 } = require("./helpers/filehelper");
+// const { upload } = require("./helpers/filehelper");
 
 
 
@@ -63,7 +63,7 @@ const storage2 = multer.diskStorage({
     cb(null, new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname);
   },
 });
-var upload2 = multer({
+var upload = multer({
   storage: storage2,
   fileFilter: (req, file, cb) => {
     if (
@@ -116,17 +116,17 @@ app.get("/getSocialLinks", Admindash.getSocialLinks);
 app.post("/setHomeBanner", upload.single("image"), Admindash.setHomeBanner);
 app.get("/getHomeBanner", Admindash.getHomeBanner);
 /////////////////////////////////////////////////////////////////
-app.post("/setNftPromote",  upload2.array("files"), Admindash.setNftPromote);
+app.post("/setNftPromote",  upload.array("files"), Admindash.setNftPromote);
 app.get("/getNftPromoteRefresh", Admindash.getNftPromote);
 
-app.post("/setNftPopular", upload2.array("files"), Admindash.setNftPopular);
+app.post("/setNftPopular", upload.array("files"), Admindash.setNftPopular);
 app.get("/getNftPopularRefresh", Admindash.getNftPopular);
 
-app.post("/setNftRecent", upload2.array("files"), Admindash.setNftRecent);
+app.post("/setNftRecent", upload.array("files"), Admindash.setNftRecent);
 app.get("/getNftRecentRefresh", Admindash.getNftRecent);
 
 
-app.post("/setNftBanner", upload2.array("files"), Admindash.setNftBanner);
+app.post("/setNftBanner", upload.array("files"), Admindash.setNftBanner);
 app.get("/getNftBannerRefresh", Admindash.getNftBanner);
 
 app.post("/updateAboutUs", Admindash.updateAboutUs);

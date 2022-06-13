@@ -187,55 +187,105 @@ const adminDashboard = {
   },
 
   // const multipleFileUpload = async (req, res, next) => {
+  // setNftPromote: async function (req, res, next) {
+  //   try {
+  //     console.log("req");
+  //     console.log(req);
+  //     let filesArray = [];
+  //     req.files.forEach((element) => {
+  //       const file = {
+  //         fileName: element.originalname,
+  //         filePath: element.path,
+  //         fileType: element.mimetype,
+  //         //  fileSize: fileSizeFormatter(element.size, 2),
+  //       };
+  //       filesArray.push(file);
+  //     });
+  //     console.log(req.body.id);
+  //     let id = req.body.id;
+
+  //     const multipleFiles = {
+  //       title: req.body.title,
+  //       files: filesArray,
+  //     };
+
+  //     let isUpdates = await NftPromote.findOneAndUpdate(
+  //       { _id: id },
+  //       multipleFiles,
+  //       { upsert: true }
+  //     );
+  //     // if (isUpdates) {
+  //     //   console.log("isUpdates", isUpdates);
+  //     //   return res.send({
+  //     //     msg: "Files Uploaded Successfully",
+  //     //     isUpdates,
+  //     //   });
+  //     // }
+  //     // let isSaved = await multipleFiles.save();
+  //     //  res.status(201).send("Files Uploaded Successfully");
+  //     // console.log(isSaved);
+  //     if (isUpdates) {
+  //       console.log("test");
+  //       const user = await NftPromote.find();
+
+  //       return res.send({
+  //         msg: "Updated Successful",
+  //         user,
+  //       });
+  //       //       return res.send({
+  //       //   msg: "Files Uploaded Successfully", // + redirect to verify page
+  //       // });
+  //     }
+  //   } catch (error) {
+  //     res.status(400).send(error.message);
+  //   }
+  // },
+
   setNftPromote: async function (req, res, next) {
     try {
-      
       console.log("req");
       console.log(req);
       let filesArray = [];
       req.files.forEach((element) => {
-          const file = {
-            fileName: element.originalname,
-            filePath: element.path,
-            fileType: element.mimetype,
-            //  fileSize: fileSizeFormatter(element.size, 2),
-          };
+        const file = {
+          fileName: element.originalname,
+          filePath: element.path,
+          fileType: element.mimetype,
+          //  fileSize: fileSizeFormatter(element.size, 2),
+        };
         filesArray.push(file);
       });
       console.log(req.body.id);
       let id = req.body.id;
+
+      //  const multipleFiles = new NftBanner({
+      //    title: req.body.title,
+      //    files: filesArray,
+      //  });
+      //  await multipleFiles.save();
 
       const multipleFiles = {
         title: req.body.title,
         files: filesArray,
       };
 
+      // let isSaved = await multipleFiles.save();
+      //  res.status(201).send("Files Uploaded Successfully");
+      // console.log(isSaved);
+
       let isUpdates = await NftPromote.findOneAndUpdate(
         { _id: id },
         multipleFiles,
         { upsert: true }
       );
-      // if (isUpdates) {
-      //   console.log("isUpdates", isUpdates);
-      //   return res.send({
-      //     msg: "Files Uploaded Successfully",
-      //     isUpdates,
-      //   });
-      // }
-      // let isSaved = await multipleFiles.save();
-      //  res.status(201).send("Files Uploaded Successfully");
-      // console.log(isSaved);
       if (isUpdates) {
         console.log("test");
         const user = await NftPromote.find();
 
-         return res.send({
-           msg: "Updated Successful",
-           user,
-         });
-        //       return res.send({
-        //   msg: "Files Uploaded Successfully", // + redirect to verify page
-        // });
+        return res.send({
+          msg: "Updated Successful",
+          user,
+        });
       }
     } catch (error) {
       res.status(400).send(error.message);
@@ -405,8 +455,6 @@ const adminDashboard = {
 
       let data = Object.assign({}, req.body);
 
-
-
       // // //First save me
       //  const user = new HomeDocs(data);
       // let isSaved =  await user.save();
@@ -421,9 +469,13 @@ const adminDashboard = {
       //   data,
       // };
 
-      let isUpdates = await HomeDocsHeading.findOneAndUpdate({ _id: id }, data, {
-        upsert: true,
-      });
+      let isUpdates = await HomeDocsHeading.findOneAndUpdate(
+        { _id: id },
+        data,
+        {
+          upsert: true,
+        }
+      );
       if (isUpdates) {
         console.log("test");
         const user = await HomeDocsHeading.find();

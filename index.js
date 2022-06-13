@@ -8,13 +8,7 @@ const path = require("path");
 const cors = require("cors");
 
 
-// app.use(cors());
 
-// const options = {
-//   origin: "http://localhost:3000",
-// };
-// // const { upload } = require("./helpers/filehelper");
-// app.use(cors(options));
 app.use(cors());
 
 

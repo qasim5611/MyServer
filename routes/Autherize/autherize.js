@@ -53,7 +53,7 @@ const Auth = {
     console.log(req.body.name);
     console.log(req.body);
     //  const origin = req.hostname;
-    const origin = "https://ragdoolserver.herokuapp.com";
+    const origin = "https://ap.ragdollcatnft.com";
 
     const result = await userModel.findOne({ email: req.body.email });
     if (result) {

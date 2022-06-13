@@ -229,7 +229,10 @@ const adminDashboard = {
         console.log("test");
         const user = await NftPromote.find();
 
-        return res.json(user);
+         return res.send({
+           msg: "Updated Successful",
+           user,
+         });
         //       return res.send({
         //   msg: "Files Uploaded Successfully", // + redirect to verify page
         // });

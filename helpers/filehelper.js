@@ -18,6 +18,7 @@ const filefilter = (req, file, cb) => {
         }
 }
 
+
 const uploadall = multer({ storage: storage, fileFilter: filefilter });
 
 module.exports = { uploadall };

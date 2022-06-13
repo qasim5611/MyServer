@@ -189,6 +189,7 @@ const adminDashboard = {
   // const multipleFileUpload = async (req, res, next) => {
   setNftPromote: async function (req, res, next) {
     try {
+      
       console.log("req");
       console.log(req);
       let filesArray = [];

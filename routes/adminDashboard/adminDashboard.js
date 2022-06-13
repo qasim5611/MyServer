@@ -186,165 +186,6 @@ const adminDashboard = {
     }
   },
 
-  // const multipleFileUpload = async (req, res, next) => {
-  // setNftPromote: async function (req, res, next) {
-  //   try {
-  //     console.log("req");
-  //     console.log(req);
-  //     let filesArray = [];
-  //     req.files.forEach((element) => {
-  //       const file = {
-  //         fileName: element.originalname,
-  //         filePath: element.path,
-  //         fileType: element.mimetype,
-  //         //  fileSize: fileSizeFormatter(element.size, 2),
-  //       };
-  //       filesArray.push(file);
-  //     });
-  //     console.log(req.body.id);
-  //     let id = req.body.id;
-
-  //     const multipleFiles = {
-  //       title: req.body.title,
-  //       files: filesArray,
-  //     };
-
-  //     let isUpdates = await NftPromote.findOneAndUpdate(
-  //       { _id: id },
-  //       multipleFiles,
-  //       { upsert: true }
-  //     );
-  //     // if (isUpdates) {
-  //     //   console.log("isUpdates", isUpdates);
-  //     //   return res.send({
-  //     //     msg: "Files Uploaded Successfully",
-  //     //     isUpdates,
-  //     //   });
-  //     // }
-  //     // let isSaved = await multipleFiles.save();
-  //     //  res.status(201).send("Files Uploaded Successfully");
-  //     // console.log(isSaved);
-  //     if (isUpdates) {
-  //       console.log("test");
-  //       const user = await NftPromote.find();
-
-  //       return res.send({
-  //         msg: "Updated Successful",
-  //         user,
-  //       });
-  //       //       return res.send({
-  //       //   msg: "Files Uploaded Successfully", // + redirect to verify page
-  //       // });
-  //     }
-  //   } catch (error) {
-  //     res.status(400).send(error.message);
-  //   }
-  // },
-
-  setNftPopular: async function (req, res, next) {
-    try {
-      console.log("req");
-      console.log(req);
-      let filesArray = [];
-      req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          //  fileSize: fileSizeFormatter(element.size, 2),
-        };
-        filesArray.push(file);
-      });
-      console.log(req.body.id);
-      let id = req.body.id;
-
-      // const multipleFiles = new MultipleFile({
-      //   title: req.body.title,
-      //   files: filesArray,
-      // });
-      // await multipleFiles.save();
-
-      const multipleFiles = {
-        title: req.body.title,
-        files: filesArray,
-      };
-      // await multipleFiles.save();
-      // res.status(201).send("Files Uploaded Successfully");
-
-      // if (isUpdates) {
-      //   console.log("isUpdates", isUpdates);
-      //   return res.send({
-      //     msg: "Files Uploaded Successfully",
-      //     isUpdates,
-      //   });
-      // }
-
-      // console.log(isSaved)
-
-      let isUpdates = await NftPopular.findOneAndUpdate(
-        { _id: id },
-        multipleFiles,
-        { upsert: true }
-      );
-      if (isUpdates) {
-        console.log("test");
-        const user = await NftPopular.find();
-
-        return res.json(user);
-      }
-    } catch (error) {
-      res.status(400).send(error.message);
-    }
-  },
-
-  setNftRecent: async function (req, res, next) {
-    try {
-      console.log("req");
-      console.log(req);
-      let filesArray = [];
-      req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          //  fileSize: fileSizeFormatter(element.size, 2),
-        };
-        filesArray.push(file);
-      });
-      console.log(req.body.id);
-      let id = req.body.id;
-
-      //  const multipleFiles = new NftRecent({
-      //    title: req.body.title,
-      //    files: filesArray,
-      //  });
-      //  await multipleFiles.save();
-
-      const multipleFiles = {
-        title: req.body.title,
-        files: filesArray,
-      };
-
-      // let isSaved = await multipleFiles.save();
-      //  res.status(201).send("Files Uploaded Successfully");
-      // console.log(isSaved);
-
-      let isUpdates = await NftRecent.findOneAndUpdate(
-        { _id: id },
-        multipleFiles,
-        { upsert: true }
-      );
-      if (isUpdates) {
-        console.log("test");
-        const user = await NftRecent.find();
-
-        return res.json(user);
-      }
-    } catch (error) {
-      res.status(400).send(error.message);
-    }
-  },
-
   setHomeDocs: async function (req, res) {
     try {
       console.log("req");
@@ -542,6 +383,51 @@ const adminDashboard = {
     }
   },
 
+  getHomeDocs: async function (req, res) {
+    try {
+      console.log("test");
+      const user = await HomeDocs.find();
+
+      // return res.json(user);
+      return res.send({
+        msg: "Updated Successful",
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getDocsHeading: async function (req, res) {
+    try {
+      console.log("test");
+      const user = await HomeDocsHeading.find();
+
+      // return res.json(user);
+      return res.send({
+        msg: "Updated Successful",
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getHomeDocsbyid: async function (req, res) {
+    try {
+      console.log("req", req.query.id);
+
+      const user = await HomeDocs.find().where("_id").equals(req.query.id);
+
+      return res.send({
+        msg: "Find Successfully",
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   setNftPromote: async function (req, res, next) {
     try {
       console.log("req");
@@ -592,80 +478,148 @@ const adminDashboard = {
       res.status(400).send(error.message);
     }
   },
-
-  getHomeDocs: async function (req, res) {
-    try {
-      console.log("test");
-      const user = await HomeDocs.find();
-
-      // return res.json(user);
-      return res.send({
-        msg: "Updated Successful",
-        user,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-
-  getDocsHeading: async function (req, res) {
-    try {
-      console.log("test");
-      const user = await HomeDocsHeading.find();
-
-      // return res.json(user);
-      return res.send({
-        msg: "Updated Successful",
-        user,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-
-  getHomeDocsbyid: async function (req, res) {
-    try {
-      console.log("req", req.query.id);
-
-      const user = await HomeDocs.find().where("_id").equals(req.query.id);
-
-      return res.send({
-        msg: "Find Successfully",
-        user,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-
   getNftPromote: async function (req, res) {
     try {
       console.log("test");
       const user = await NftPromote.find();
 
-      return res.json(user);
+      // return res.json(user);
+      return res.send({
+        msg: "Updated Successful",
+        user,
+      });
     } catch (error) {
       console.log(error);
     }
   },
 
+  ///////////////////////////
+  setNftPopular: async function (req, res, next) {
+    try {
+      console.log("req");
+      console.log(req);
+      let filesArray = [];
+      req.files.forEach((element) => {
+        const file = {
+          fileName: element.originalname,
+          filePath: element.path,
+          fileType: element.mimetype,
+          //  fileSize: fileSizeFormatter(element.size, 2),
+        };
+        filesArray.push(file);
+      });
+      console.log(req.body.id);
+      let id = req.body.id;
+
+      //  const multipleFiles = new NftBanner({
+      //    title: req.body.title,
+      //    files: filesArray,
+      //  });
+      //  await multipleFiles.save();
+
+      const multipleFiles = {
+        title: req.body.title,
+        files: filesArray,
+      };
+
+      // let isSaved = await multipleFiles.save();
+      //  res.status(201).send("Files Uploaded Successfully");
+      // console.log(isSaved);
+
+      let isUpdates = await NftPopular.findOneAndUpdate(
+        { _id: id },
+        multipleFiles,
+        { upsert: true }
+      );
+      if (isUpdates) {
+        console.log("test");
+        const user = await NftPopular.find();
+
+        return res.send({
+          msg: "Updated Successful",
+          user,
+        });
+      }
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  },
   getNftPopular: async function (req, res) {
     try {
       console.log("test");
       const user = await NftPopular.find();
 
-      return res.json(user);
+      // return res.json(user);
+      return res.send({
+        msg: "Updated Successful",
+        user,
+      });
     } catch (error) {
       console.log(error);
     }
   },
 
+  ///////////////////////
+  setNftRecent: async function (req, res, next) {
+    try {
+      console.log("req");
+      console.log(req);
+      let filesArray = [];
+      req.files.forEach((element) => {
+        const file = {
+          fileName: element.originalname,
+          filePath: element.path,
+          fileType: element.mimetype,
+          //  fileSize: fileSizeFormatter(element.size, 2),
+        };
+        filesArray.push(file);
+      });
+      console.log(req.body.id);
+      let id = req.body.id;
+
+      //  const multipleFiles = new NftBanner({
+      //    title: req.body.title,
+      //    files: filesArray,
+      //  });
+      //  await multipleFiles.save();
+
+      const multipleFiles = {
+        title: req.body.title,
+        files: filesArray,
+      };
+
+      // let isSaved = await multipleFiles.save();
+      //  res.status(201).send("Files Uploaded Successfully");
+      // console.log(isSaved);
+
+      let isUpdates = await NftRecent.findOneAndUpdate(
+        { _id: id },
+        multipleFiles,
+        { upsert: true }
+      );
+      if (isUpdates) {
+        console.log("test");
+        const user = await NftRecent.find();
+
+        return res.send({
+          msg: "Updated Successful",
+          user,
+        });
+      }
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  },
   getNftRecent: async function (req, res) {
     try {
       console.log("test");
       const user = await NftRecent.find();
 
-      return res.json(user);
+      // return res.json(user);
+      return res.send({
+        msg: "Updated Successful",
+        user,
+      });
     } catch (error) {
       console.log(error);
     }

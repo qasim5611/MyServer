@@ -6,7 +6,7 @@ const cors = require("cors");
 // 'use strict';
 const multer = require("multer");
 
-app.use(cors());
+// app.use(cors());
 
 
 const storage = multer.diskStorage({
@@ -32,18 +32,7 @@ const filefilter = (req, file, cb) => {
   }
 };
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-  );
-  next();
-});
+
 
 const uploadall = multer({ storage: storage, fileFilter: filefilter });
 

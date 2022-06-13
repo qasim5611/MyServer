@@ -7,9 +7,11 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 
-const { uploadall } = require("./helpers/filehelper");
 
 app.use(cors());
+const { uploadall } = require("./helpers/filehelper");
+
+
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));

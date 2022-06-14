@@ -7,7 +7,7 @@ const app = express();
 const path = require("path");
 
 
-// const cors = require("cors");
+const cors = require("cors");
 
 // app.use(cors());
 
@@ -98,14 +98,14 @@ app.use("/uploads", express.static(path.join(_dirname, "uploads")));
 // Frontend Site Login System
 let Authenticate = require("./routes/Autherize/autherize");
 
-app.post("/register", Authenticate.register);
-app.get("/verify-email", Authenticate.verifyEmail);
-app.post("/authenticate", Authenticate.authenticate);
-app.post("/forgot-password", Authenticate.forgotPassword);
-app.post("/VerifyTokenforpass", Authenticate.verifyCode);
-app.post("/resetpassword", Authenticate.resetPassword);
+app.post("/register", cors() , Authenticate.register);
+app.get("/verify-email", cors() , Authenticate.verifyEmail);
+app.post("/authenticate", cors(), Authenticate.authenticate);
+app.post("/forgot-password", cors(), Authenticate.forgotPassword);
+app.post("/VerifyTokenforpass", cors(), Authenticate.verifyCode);
+app.post("/resetpassword", cors(), Authenticate.resetPassword);
 
-app.post("/getcurrentUser", Authenticate.currentUser);
+app.post("/getcurrentUser", cors(), Authenticate.currentUser);
 
 
 //Admin Dashboard SiteData Changes
@@ -121,8 +121,8 @@ app.get("/getSocialLinks", Admindash.getSocialLinks);
 app.post("/setHomeBanner", upload.single("image"), Admindash.setHomeBanner);
 app.get("/getHomeBanner", Admindash.getHomeBanner);
 /////////////////////////////////////////////////////////////////
-app.post("/setNftPromote",  upload.array("files"), Admindash.setNftPromote);
-app.get("/getNftPromoteRefresh", Admindash.getNftPromote);
+app.post("/setNftPromote", cors() , upload.array("files"), Admindash.setNftPromote);
+app.get("/getNftPromoteRefresh", cors(), Admindash.getNftPromote);
 
 app.post("/setNftPopular", upload.array("files"), Admindash.setNftPopular);
 app.get("/getNftPopularRefresh", Admindash.getNftPopular);

@@ -9,7 +9,9 @@ const path = require("path");
 
 const cors = require("cors");
 
-app.use(cors());
+router.use(cors());
+
+
 
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -95,6 +97,7 @@ var upload = multer({
 app.use("/uploads", express.static(path.join(_dirname, "uploads")));
 
 
+
 // Frontend Site Login System
 let Authenticate = require("./routes/Autherize/autherize");
 
@@ -121,7 +124,7 @@ app.get("/getSocialLinks", Admindash.getSocialLinks);
 app.post("/setHomeBanner", upload.single("image"), Admindash.setHomeBanner);
 app.get("/getHomeBanner", Admindash.getHomeBanner);
 /////////////////////////////////////////////////////////////////
-app.post("/setNftPromote",  upload.array("files"), Admindash.setNftPromote);
+app.post("/setNftPromote",  upload.array("image"), Admindash.setNftPromote);
 app.get("/getNftPromoteRefresh", Admindash.getNftPromote);
 
 app.post("/setNftPopular", upload.array("files"), Admindash.setNftPopular);

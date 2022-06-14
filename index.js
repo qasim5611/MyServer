@@ -5,26 +5,17 @@ const connectDatabase = require("./config/connection");
 
 const app = express();
 const path = require("path");
+
+
 const cors = require("cors");
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-
-app.use(function (req, res, next) {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    // res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+const corsOptions = {
+  origin: "http://server.ragdollcatnft.com",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 
-    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    // res.setHeader('Access-Control-Allow-Credentials', true);
-
-    next();
-});
 
 
 var bodyParser = require("body-parser");

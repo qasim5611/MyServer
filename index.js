@@ -6,6 +6,10 @@ const connectDatabase = require("./config/connection");
 const app = express();
 const path = require("path");
 const cors = require("cors");
+
+const { uploadall } = require("./helpers/filehelper");
+
+
 app.use(cors());
 
 
@@ -114,17 +118,17 @@ app.get("/getSocialLinks", Admindash.getSocialLinks);
 app.post("/setHomeBanner", upload.single("image"), Admindash.setHomeBanner);
 app.get("/getHomeBanner", Admindash.getHomeBanner);
 /////////////////////////////////////////////////////////////////
-app.post("/setNftPromote",  upload.array("image"), Admindash.setNftPromote);
+app.post("/setNftPromote",  uploadall.array("image"), Admindash.setNftPromote);
 app.get("/getNftPromoteRefresh", Admindash.getNftPromote);
 
-app.post("/setNftPopular", upload.array("files"), Admindash.setNftPopular);
+app.post("/setNftPopular", uploadall.array("files"), Admindash.setNftPopular);
 app.get("/getNftPopularRefresh", Admindash.getNftPopular);
 
-app.post("/setNftRecent", upload.array("files"), Admindash.setNftRecent);
+app.post("/setNftRecent", uploadall.array("files"), Admindash.setNftRecent);
 app.get("/getNftRecentRefresh", Admindash.getNftRecent);
 
 
-app.post("/setNftBanner", upload.array("files"), Admindash.setNftBanner);
+app.post("/setNftBanner", uploadall.array("files"), Admindash.setNftBanner);
 app.get("/getNftBannerRefresh", Admindash.getNftBanner);
 
 app.post("/updateAboutUs", Admindash.updateAboutUs);
